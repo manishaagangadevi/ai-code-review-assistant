@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import * as AdmZip from 'adm-zip';
+import AdmZip = require('adm-zip');
 import * as path from 'path';
 import * as fs from 'fs';
 
@@ -15,7 +15,7 @@ export class FilesService {
 
     const zip = new AdmZip(file.buffer);
     const entries = zip.getEntries();
-    const created = [];
+    const created: any[] = [];
 
     for (const entry of entries) {
       if (entry.isDirectory) continue;
@@ -78,10 +78,10 @@ export class FilesService {
   }
 
   private buildTree(files: any[]) {
-    const tree = {};
+    const tree: any = {};
     for (const file of files) {
       const parts = file.path.split('/');
-      let node = tree;
+      let node: any = tree;
       for (let i = 0; i < parts.length - 1; i++) {
         if (!node[parts[i]]) node[parts[i]] = { __files: [] };
         node = node[parts[i]];
