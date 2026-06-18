@@ -63,15 +63,19 @@ export class AiProviderService {
   }
 
   async getProviderWithClient(userId: string, providerId?: string) {
-    const provider = providerId
-      ? await this.findOne(userId, providerId)
-      : await this.getDefaultProvider(userId);
+  const provider = providerId
+    ? await this.findOne(userId, providerId)
+    : await this.getDefaultProvider(userId);
 
-    const client = new OpenAI({
-      apiKey: provider.apiKey || 'not-needed',
-      baseURL: provider.baseUrl,
-    });
+  const client = new OpenAI({
+    apiKey: provider.apiKey || 'not-needed',
+    baseURL: provider.baseUrl,
+    defaultHeaders: {
+      'HTTP-Referer': 'http://localhost:3000',
+      'X-Title': 'AI Code Review Assistant',
+    },
+  });
 
-    return { provider, client };
-  }
+  return { provider, client };
+}
 }
