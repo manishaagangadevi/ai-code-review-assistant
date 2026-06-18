@@ -68,4 +68,4 @@ npm run dev
 
 ## AI Usage
 
-See AI_USAGE.md for full disclosure of AI tools used, prompts, and engineering decisions.
+See AI_USAGE.md for full disclosure of AI tools used, prompts, and engineering decisions. 
